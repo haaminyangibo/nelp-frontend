@@ -4,16 +4,16 @@ import { Card, Icon } from 'semantic-ui-react'
 
 const RestaurantCard = props => {
 
-    const {restaurant} = props 
+    const {restaurant, showCardDetails} = props 
 
-    const category = restaurant.categories.map(title=> title.title )
+//     const category = restaurant.categories.map(title=> title.title )
 
    return(
         
-        <Card
+        <Card fluid onClick= {()=>showCardDetails(restaurant.id)}
         image = {restaurant.image_url}
         header ={restaurant.name}
-        meta ={category}
+     //    meta ={category}
      //    description='restauarant description'
         
  
