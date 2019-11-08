@@ -6,23 +6,15 @@ import { Card } from 'semantic-ui-react';
 
 
 const RestaurantList = props => {
-    const {restaurants, showCardDetails, selectedRestaurant} = props; 
+
+    const {restaurants, showCardDetails} = props; 
     return (
-
-
        <div>
-
-       
-
-         
-         <Card.Group itemsPerRow ={6}>
+  <Card.Group itemsPerRow ={6}>
        { restaurants.map( restaurant => <RestaurantCard restaurant = {restaurant} showCardDetails={showCardDetails}/>)}
-        </Card.Group> 
-
-        </div>
-
-        )
-    
+ </Card.Group> 
+     </div>
+         )   
 }
 
 

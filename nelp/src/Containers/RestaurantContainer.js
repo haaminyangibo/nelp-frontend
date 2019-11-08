@@ -3,6 +3,7 @@ import RestaurantList from '../Components/RestaurantList'
 import API from '../API';
 import ShowRestaurant from '../Components/ShowRestaurant'
 
+
 class RestaurantContainer extends React.Component {
 
  
@@ -33,6 +34,7 @@ class RestaurantContainer extends React.Component {
         showRestaurant :true
 
          }
+        
      )
 }
 
@@ -47,12 +49,8 @@ class RestaurantContainer extends React.Component {
 
      render (){
 
- 
-
-        return (
-            
+        return (     
         this.state.showRestaurant ?
-
         <RestaurantList restaurants = {this.state.selectedRestaurant} showCardDetails = {this.removeCardDetails}/> 
             
          :
