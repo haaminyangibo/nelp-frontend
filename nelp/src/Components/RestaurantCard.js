@@ -6,11 +6,16 @@ const RestaurantCard = props => {
 
     const {restaurant} = props 
 
+    const category = restaurant.categories.map(title=> title.title )
+
    return(
-        <Card 
+        
+        <Card
+        image = {restaurant.image_url}
         header ={restaurant.name}
-        meta='Restaurant Category'
-        description='restauarant description'
+        meta ={category}
+     //    description='restauarant description'
+        
  
         /> 
   

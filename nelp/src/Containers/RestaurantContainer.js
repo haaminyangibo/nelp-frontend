@@ -1,10 +1,20 @@
 import React from 'react';
 import RestaurantList from '../Components/RestaurantList'
+import API from '../API';
 
 class RestaurantContainer extends React.Component {
 
+ 
+
     state = {
-        restaurants : [{name: "Burger King"}, {name: "Mcdonalds"}, {name: "KFC"}]
+      restaurants : []
+    }
+
+    componentDidMount(){
+       return fetch("http://localhost:3000/restaurants").then(resp=> resp.json()).then( data => this.setState({
+
+        restaurants: data["businesses"]
+        }))
     }
 
     render (){
