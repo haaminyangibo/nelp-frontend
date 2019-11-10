@@ -5,15 +5,15 @@ import RestaurantContainer from './Containers/RestaurantContainer'
 import Header from './Containers/Header'
 
 
-
 function App() {
+  // console.log(process.env.REACT_APP_SECRET)
   return (
    
     
     <div>  
-      <Header/>
+      {/* <Header/>
        <NavBar/> 
-     <RestaurantContainer/>
+     <RestaurantContainer/> */}
      
      </div>
      
