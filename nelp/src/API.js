@@ -2,16 +2,24 @@ const API_ENDPOINT = "http://localhost:3000";
 
 const USERS_URL = `${API_ENDPOINT}/users`;
 const SIGN_IN_URL = `${API_ENDPOINT}/signin`;
-const VALIDATE_URL = `${API_ENDPOINT}/validate`;
+const VALIDATE_URL = `${API_ENDPOINT}/validate`; // TODO
 
 const RESTAURANTS_URL = `${API_ENDPOINT}/restaurants`;
 
 // YELP API
 
 const getRestaurants = (location, category) => {
+    const url = `${RESTAURANTS_URL}?location=${location}&category=${category}`
+    return get(url)
+}
 
-    let url = `${RESTAURANTS_URL}?location=${location}&category=${category}`
-    console.log(url)
+const getRestaurant = (businessId) => {
+    const url = `${RESTAURANTS_URL}/${businessId}`
+    return get(url)
+}
+
+const getRestaurantReviews = (businessId) => {
+    const url = `${RESTAURANTS_URL}/${businessId}/reviews`
     return get(url)
 }
 
@@ -19,7 +27,6 @@ const getRestaurants = (location, category) => {
 
 const createUser = (userData) => {
     let configObject = generateConfigObject("POST", userData)
-    debugger
     return post(USERS_URL, configObject).then(console.log)
 }
 
@@ -29,32 +36,22 @@ const signIn = (email, password) => {
         password: password 
     }
     post(SIGN_IN_URL, data).then(setTokenToLocalStorage)
-    // returns first_name and token -> save this to state!
-}
-
-const setTokenToLocalStorage = (resp) => {
-    localStorage.setItem("token", resp.token)
 }
 
 const signOut = () => {
     localStorage.removeItem("token")
 }
 
+const setTokenToLocalStorage = (resp) => {
+    localStorage.setItem("token", resp.token)
+}
 
 
 // HELPER METHODS
 
 const get = (url) => {
-    // if(params){
-    //     params = params + '?'
-    //     params.forEach((k,v) => {
-    //         params = params + k + '=' + v
-    //     }
-    // }
     return fetch(url).then(resp => resp.json())
 }
-
-
 
 const post = (url, data) => {
     let configObject = generateConfigObject("POST", data);
@@ -72,16 +69,10 @@ const generateConfigObject = (method, data) => {
 }
 
 
-
-const user = {
-    first_name: "Test2",
-    last_name: "User2",
-    email: "testuser@gmail.com",
-    password: "password1"
-}
-
 export default {
     getRestaurants,
+    getRestaurant,
+    getRestaurantReviews,
     createUser,
     signIn, 
     signOut
