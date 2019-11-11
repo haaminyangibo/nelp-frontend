@@ -34,6 +34,8 @@ const getWorstReviewedRestaurants = () => {
     return badRestaurantsData
 }
 
+
+
 // USER CREATION & AUTHENTICATION
 
 const createUser = (userData) => {

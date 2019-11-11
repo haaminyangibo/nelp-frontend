@@ -2,16 +2,18 @@ import React from 'react';
 import RestaurantList from '../Components/RestaurantList'
 import API from '../API';
 import ShowRestaurant from '../Components/ShowRestaurant'
+import RestaurantDetails from '../Components/RestaurantDetails'
+
 
 
 class RestaurantContainer extends React.Component {
 
- 
     state = {
       restaurants : [],
       selectedRestaurant: [],
-      showRestaurant: false
-
+      showRestaurant: false,
+    selectedRestaurantID : [],
+    savedRestaurant :[]
     }
 
 
@@ -25,19 +27,23 @@ class RestaurantContainer extends React.Component {
    showCardDetails = (id) => {
 
      let  restaurantId = id
-     console.log(restaurantId)
     let clickedRestuarant = (this.state.restaurants.filter(restaurant => restaurant.id === restaurantId ))
 
     this.setState({
-
         selectedRestaurant: clickedRestuarant,
-        showRestaurant :true
+        showRestaurant :true,
+        selectedRestaurantID :id
+             }
+         )
+    }
 
-         }
-        
-     )
-}
+    saveRestaurant = (id) => {
+         let savedRestaurantId = id   
 
+        this.setState ({
+            savedRestaurant: [...this.state.savedRestaurant, savedRestaurantId]
+        })}
+    
 
     removeCardDetails = () => {
 
@@ -46,18 +52,13 @@ class RestaurantContainer extends React.Component {
         })
     }
 
-
      render (){
 
         return (     
         this.state.showRestaurant ?
-        <RestaurantList restaurants = {this.state.selectedRestaurant} showCardDetails = {this.removeCardDetails}/> 
-            
+        <RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant}/>
          :
-
-         <RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant}/>
-
-         
+        <RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/>
 
         )
     }
