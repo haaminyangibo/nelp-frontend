@@ -1,3 +1,5 @@
+import bad_restaurants from './bad_restaurants'
+
 const API_ENDPOINT = "http://localhost:3000";
 
 const USERS_URL = `${API_ENDPOINT}/users`;
@@ -21,6 +23,15 @@ const getRestaurant = (businessId) => {
 const getRestaurantReviews = (businessId) => {
     const url = `${RESTAURANTS_URL}/${businessId}/reviews`
     return get(url)
+}
+
+// NEEDS TO RUN IN APP.js 
+const getWorstReviewedRestaurants = () => {
+    let badRestaurantsData = []
+    bad_restaurants.forEach(business_id => {
+        getRestaurant(business_id).then(resp => badRestaurantsData.push(resp))
+    })
+    return badRestaurantsData
 }
 
 // USER CREATION & AUTHENTICATION
@@ -73,6 +84,7 @@ export default {
     getRestaurants,
     getRestaurant,
     getRestaurantReviews,
+    getWorstReviewedRestaurants,
     createUser,
     signIn, 
     signOut

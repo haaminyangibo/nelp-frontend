@@ -5,3 +5,6 @@ const bad_restaurants = [
    "Z7yacGcd6j6lEETHLY0riw", // Golden Dragon
    "VeVz99VbVlrIAvpvj0sJMg" // Elaichi Indian
 ]
+
+export default bad_restaurants
+
