@@ -7,18 +7,22 @@ import Search from './Components/Search'
 
 
 
-
 function App() {
-  
+
+  // console.log(process.env.REACT_APP_SECRET)
+
   return (
    
     
     <div>  
-      <Header/>
+       <Header/>
        <NavBar/> 
+
        {/* <Search /> */}
 
      <RestaurantContainer/>
+
+
      
      </div>
      
