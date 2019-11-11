@@ -6,7 +6,7 @@ render(){
     return(
         <div>
         <Menu> 
-            <Menu.Item name="Home" />
+            <Menu.Item name="Home"  />
             <Menu.Item name="Reviews" />
             <Menu.Item name="Resuarants" />
         </Menu>

@@ -7,11 +7,11 @@ import { Card } from 'semantic-ui-react';
 
 const RestaurantList = props => {
 
-    const {restaurants, showCardDetails} = props; 
+    const {restaurants, showCardDetails, saveRestaurant} = props; 
     return (
        <div>
-  <Card.Group itemsPerRow ={6}>
-       { restaurants.map( restaurant => <RestaurantCard restaurant = {restaurant} showCardDetails={showCardDetails}/>)}
+  <Card.Group itemsPerRow ={5}>
+       { restaurants.map( restaurant => <RestaurantCard restaurant = {restaurant} showCardDetails={showCardDetails} saveRestaurant= {saveRestaurant}/>)}
  </Card.Group> 
      </div>
          )   

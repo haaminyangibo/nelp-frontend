@@ -24,6 +24,8 @@ const getRestaurants = (location, category) => {
     return get(RESTAURANTS_URL, configObject)
 }
 
+
+
 // USER CREATION & AUTHENTICATION
 
 const createUser = (userData) => {
