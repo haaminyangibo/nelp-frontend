@@ -1,34 +1,43 @@
+import bad_restaurants from './bad_restaurants'
+
 const API_ENDPOINT = "http://localhost:3000";
 
 const USERS_URL = `${API_ENDPOINT}/users`;
 const SIGN_IN_URL = `${API_ENDPOINT}/signin`;
-const VALIDATE_URL = `${API_ENDPOINT}/validate`;
+const VALIDATE_URL = `${API_ENDPOINT}/validate`; // TODO
 
 const RESTAURANTS_URL = `${API_ENDPOINT}/restaurants`;
 
 // YELP API
 
 const getRestaurants = (location, category) => {
-    let parameters = {
-        location: location,
-        category: category
-    }
+    const url = `${RESTAURANTS_URL}?location=${location}&category=${category}`
+    return get(url)
+}
 
-    let configObject = {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        params: JSON.stringify(parameters)
-    }
-    return get(RESTAURANTS_URL, configObject)
+const getRestaurant = (businessId) => {
+    const url = `${RESTAURANTS_URL}/${businessId}`
+    return get(url)
+}
+
+const getRestaurantReviews = (businessId) => {
+    const url = `${RESTAURANTS_URL}/${businessId}/reviews`
+    return get(url)
+}
+
+// NEEDS TO RUN IN APP.js 
+const getWorstReviewedRestaurants = () => {
+    let badRestaurantsData = []
+    bad_restaurants.forEach(business_id => {
+        getRestaurant(business_id).then(resp => badRestaurantsData.push(resp))
+    })
+    return badRestaurantsData
 }
 
 // USER CREATION & AUTHENTICATION
 
 const createUser = (userData) => {
     let configObject = generateConfigObject("POST", userData)
-    debugger
     return post(USERS_URL, configObject).then(console.log)
 }
 
@@ -37,14 +46,22 @@ const signIn = (email, password) => {
         email: email,
         password: password 
     }
-    post(SIGN_IN_URL, data).then(console.log)
-    // returns first_name and token -> save this to state!
+    post(SIGN_IN_URL, data).then(setTokenToLocalStorage)
 }
+
+const signOut = () => {
+    localStorage.removeItem("token")
+}
+
+const setTokenToLocalStorage = (resp) => {
+    localStorage.setItem("token", resp.token)
+}
+
 
 // HELPER METHODS
 
-const get = (url, configObject) => {
-    return fetch(url, configObject).then(resp => resp.json())
+const get = (url) => {
+    return fetch(url).then(resp => resp.json())
 }
 
 const post = (url, data) => {
@@ -63,16 +80,12 @@ const generateConfigObject = (method, data) => {
 }
 
 
-
-const user = {
-    first_name: "Test2",
-    last_name: "User2",
-    email: "testuser@gmail.com",
-    password: "password1"
-}
-
 export default {
     getRestaurants,
+    getRestaurant,
+    getRestaurantReviews,
+    getWorstReviewedRestaurants,
     createUser,
-    signIn
+    signIn, 
+    signOut
 }
