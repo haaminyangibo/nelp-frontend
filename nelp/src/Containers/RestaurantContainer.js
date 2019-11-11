@@ -3,7 +3,7 @@ import RestaurantList from '../Components/RestaurantList'
 import API from '../API';
 import ShowRestaurant from '../Components/ShowRestaurant'
 import RestaurantDetails from '../Components/RestaurantDetails'
-
+import bad_restaurants from '../bad_restaurants';
 
 
 class RestaurantContainer extends React.Component {
@@ -16,12 +16,15 @@ class RestaurantContainer extends React.Component {
     savedRestaurant :[]
     }
 
-
     componentDidMount(){
-       return fetch("http://localhost:3000/restaurants").then(resp=> resp.json()).then( data => this.setState({
-
-        restaurants: data["businesses"]
-        }))
+        bad_restaurants.forEach(id => {
+            API.getRestaurant(id).then(restaurant => this.setState({
+                restaurants: [
+                    ...this.state.restaurants,
+                    restaurant
+                ]
+            }))
+        })
     }
 
    showCardDetails = (id) => {
