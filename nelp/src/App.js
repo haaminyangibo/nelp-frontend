@@ -4,29 +4,35 @@ import './App.css';
 import RestaurantContainer from './Containers/RestaurantContainer'
 import Header from './Containers/Header'
 import Search from './Components/Search'
+import LoginForm from './Components/LoginForm'
+import SignUpForm from './Components/SignUpForm'
 
+class App extends React.Component {
 
+  state = {
+    token: ""
+  }
 
-function App() {
+  render(){
+    return (
 
-  // console.log(process.env.REACT_APP_SECRET)
+      <div>
+        <SignUpForm></SignUpForm>
+        <br>
+        </br>
+        <LoginForm></LoginForm>
+      </div>
+      
 
-  return (
-   
-    
-    <div>  
-       <Header/>
-       <NavBar/> 
-
-       {/* <Search /> */}
-
-     <RestaurantContainer/>
-
-
-     
-     </div>
-     
-  );
+      // <div>  
+      //   <Header/>
+      //   <NavBar/> 
+      //   {/* <Search /> */}
+      //   <RestaurantContainer/>
+      // </div>
+       
+    );
+  }
 }
 
 export default App
