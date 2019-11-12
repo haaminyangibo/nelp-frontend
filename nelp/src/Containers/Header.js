@@ -7,10 +7,9 @@ const Header = props => {
 
         <Menu color= "red" inverted widths={3}>
         
-           < Menu.Item
-          name='Yelp'
-          
-        />
+            < Menu.Item name='Yelp'/>
+
+            < Menu.Item name={props.user}></Menu.Item>
 
         </Menu>
     )

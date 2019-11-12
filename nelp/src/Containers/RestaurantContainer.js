@@ -3,9 +3,18 @@ import RestaurantList from '../Components/RestaurantList'
 import API from '../API';
 import ShowRestaurant from '../Components/ShowRestaurant'
 import RestaurantDetails from '../Components/RestaurantDetails'
+
 import bad_restaurants from '../bad_restaurants';
 import Seacrhabar from '../Components/Search'
 import { Switch, Route } from 'react-router-dom'
+
+
+import Searchbar from '../Components/Search'
+
+import bad_restaurants from '../data/bad_restaurants';
+
+
+
 
 class RestaurantContainer extends React.Component {
 
