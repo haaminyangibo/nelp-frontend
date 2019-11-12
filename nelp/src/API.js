@@ -5,15 +5,17 @@ const API_ENDPOINT = "http://localhost:3000";
 const USERS_URL = `${API_ENDPOINT}/users`;
 const SIGN_IN_URL = `${API_ENDPOINT}/signin`;
 const VALIDATE_URL = `${API_ENDPOINT}/validate`; // TODO
+const location = "london"
 
 const RESTAURANTS_URL = `${API_ENDPOINT}/restaurants`;
 
 
 // YELP API
 
-const getRestaurants = (location, category) => {
+const getRestaurants = (category) => {
+    // debugger
     const url = `${RESTAURANTS_URL}?location=${location}&category=${category}`
-    return get(url)
+    return get(url).then(console.log)
 }
 
 const getRestaurant = (businessId) => {
@@ -100,5 +102,9 @@ export default {
     createUser,
     signIn, 
     signOut,
+search
+    get
+
     validate
+  master
 }

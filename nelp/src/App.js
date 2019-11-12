@@ -3,7 +3,9 @@ import NavBar from './Containers/NavBar'
 import './App.css';
 import RestaurantContainer from './Containers/RestaurantContainer'
 import Header from './Containers/Header'
-import Search from './Components/Search'
+
+import Searchbar from './Components/Search'
+
 import LoginForm from './Components/LoginForm'
 import SignUpForm from './Components/SignUpForm'
 import API from './API';
@@ -29,6 +31,15 @@ class App extends React.Component {
     }
   }
 
+
+  return (
+   
+    
+    <div>  
+       <Header/>
+       <NavBar/> 
+       <Searchbar />
+
   signIn = user => {
     this.setState({ user: user.first_name })
     localStorage.setItem('token', user.token)
@@ -38,6 +49,7 @@ class App extends React.Component {
     this.setState({ user: '' })
     localStorage.removeItem('token')
   }
+
 
 
 

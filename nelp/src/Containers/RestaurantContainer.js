@@ -3,7 +3,11 @@ import RestaurantList from '../Components/RestaurantList'
 import API from '../API';
 import ShowRestaurant from '../Components/ShowRestaurant'
 import RestaurantDetails from '../Components/RestaurantDetails'
+
+import Searchbar from '../Components/Search'
+
 import bad_restaurants from '../data/bad_restaurants';
+
 
 
 class RestaurantContainer extends React.Component {
@@ -58,11 +62,13 @@ class RestaurantContainer extends React.Component {
      render (){
 
         return (     
+            
+      
         this.state.showRestaurant ?
         <RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant}/>
          :
         <RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/>
-
+      
         )
     }
 }
