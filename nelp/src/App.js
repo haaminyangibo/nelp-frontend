@@ -8,6 +8,8 @@ import LoginForm from './Components/LoginForm'
 import SignUpForm from './Components/SignUpForm'
 import API from './API';
 import {Button} from 'semantic-ui-react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import NotFound from './Components/NotFound'
 
 
 class App extends React.Component {
@@ -50,14 +52,26 @@ class App extends React.Component {
   render(){
     return (
 
-      <div>
-        <Header user={this.state.user}></Header>
-        <SignUpForm signIn={this.signIn}></SignUpForm>
-        <br>
-        </br>
-        <LoginForm signIn={this.signIn}></LoginForm>
-        { this.state.user && <Button onClick={() => this.signOut()}>Sign Out</Button>}
-      </div>
+      // <Router>
+        
+      //   <Header></Header>
+        
+
+      //   <Switch>
+      //     <Route path="/login" render = { (this.signIn)  => <LoginForm {...props}/>}/>
+      //     <Route component={NotFound}/>
+      //   </Switch>
+
+      // </Router>
+
+      // <div>
+      //   <Header user={this.state.user}></Header>
+      //   <SignUpForm signIn={this.signIn}></SignUpForm>
+      //   <br>
+      //   </br>
+      //   <LoginForm signIn={this.signIn}></LoginForm>
+      //   { this.state.user && <Button onClick={() => this.signOut()}>Sign Out</Button>}
+      // </div>
       
       // INTEGRATE WITH BELOW WHEN SIGN IN/SIGN UP DONE
       // <div>  
