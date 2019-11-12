@@ -5,7 +5,7 @@ import ShowRestaurant from '../Components/ShowRestaurant'
 import RestaurantDetails from '../Components/RestaurantDetails'
 import bad_restaurants from '../bad_restaurants';
 import Seacrhabar from '../Components/Search'
-
+import { Switch, Route } from 'react-router-dom'
 
 class RestaurantContainer extends React.Component {
 
@@ -13,12 +13,14 @@ class RestaurantContainer extends React.Component {
       restaurants : [],
       selectedRestaurant: [],
       showRestaurant: false,
-    selectedRestaurantID : [],
-    savedRestaurant :[]
+      selectedRestaurantID : [],
+      savedRestaurant :[]
     }
 
     componentDidMount(){
+
         bad_restaurants.forEach(id => {
+            // debugger 
             API.getRestaurant(id).then(restaurant => this.setState({
                 restaurants: [
                     ...this.state.restaurants,
@@ -60,12 +62,12 @@ class RestaurantContainer extends React.Component {
 
         return (     
             
-      
         this.state.showRestaurant ?
-        <RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant}/>
-         :
+          
+        <RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant} home ={this.backToHome}/>
+        :
         <RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/>
-      
+       
         )
     }
 }
