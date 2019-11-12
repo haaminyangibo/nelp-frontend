@@ -3,7 +3,7 @@ import RestaurantList from '../Components/RestaurantList'
 import API from '../API';
 import ShowRestaurant from '../Components/ShowRestaurant'
 import RestaurantDetails from '../Components/RestaurantDetails'
-import bad_restaurants from '../bad_restaurants';
+import bad_restaurants from '../data/bad_restaurants';
 
 
 class RestaurantContainer extends React.Component {
