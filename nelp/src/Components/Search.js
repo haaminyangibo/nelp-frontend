@@ -17,44 +17,23 @@ state = {
     }
 
     filterList = (event) => {
-        
- 
-    API.getRestaurants("Indian").then(data => this.setState({ initialItems: data}))
-        // debugger
-    let items = this.state.initialItems.map(item=> item.name)
-    items = items.filter(item => {
 
-    return item.toString().toLowerCase().search(event.target.value.toString().toLowerCase()) !== -1 })
-
-    
-    
-    this.setState({ items:items })}
+    this.setState({ items: event.target.value})
+}
 
     handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(event.target.value)
+    event.preventDefault()
+    console.log(event.target.value)
+    API.getRestaurants(this.state.items).then(data => this.setState({ initialItems: data})).then(console.log(this.state.initialItems))
 
     }
-
-   
-
-
-
-      
-       
-    
-
     
     render (){
         return(
-
         <div>
-
-            <form>
-                <input type ="text" placeholder ="search for restaurants" onChange ={this.filterList} onSubmit={this.handleSubmit}/>
-            </form>
-            
-            {/* {this.state.initialItems.map (item => item.name === this.state.items <RestaurantCard restaurant ={item}/>)} */}
+            <form onSubmit={(e) => {this.handleSubmit(e)}} >
+                <input type ="text" placeholder ="search for restaurants" onChange ={this.filterList} />
+            </form>         
         </div>
       
       )

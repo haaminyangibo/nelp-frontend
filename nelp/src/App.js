@@ -5,6 +5,9 @@ import RestaurantContainer from './Containers/RestaurantContainer'
 import Header from './Containers/Header'
 
 import Searchbar from './Components/Search'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
+
 
 import LoginForm from './Components/LoginForm'
 import SignUpForm from './Components/SignUpForm'
@@ -38,9 +41,22 @@ class App extends React.Component {
    
     
     <div>  
+   
+
        <Header/>
        <NavBar/> 
        <Searchbar />
+
+
+      
+       <RestaurantContainer />
+    
+
+    
+     
+     </div>
+     
+  );
 
   signIn = user => {
     this.setState({ user: user.first_name })
@@ -95,6 +111,7 @@ class App extends React.Component {
        
     );
   }
+
 }
 
 export default App

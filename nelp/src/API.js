@@ -15,6 +15,7 @@ const RESTAURANTS_URL = `${API_ENDPOINT}/restaurants`;
 const getRestaurants = (category) => {
     // debugger
     const url = `${RESTAURANTS_URL}?location=${location}&category=${category}`
+    // debugger
     return get(url).then(console.log)
 }
 
