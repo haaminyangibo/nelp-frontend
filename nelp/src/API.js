@@ -103,9 +103,6 @@ export default {
     createUser,
     signIn, 
     signOut,
-search
-    get
-
+    get,
     validate
-  master
 }

@@ -4,7 +4,6 @@ import API from '../API';
 import ShowRestaurant from '../Components/ShowRestaurant'
 import RestaurantDetails from '../Components/RestaurantDetails'
 
-import bad_restaurants from '../bad_restaurants';
 import Seacrhabar from '../Components/Search'
 import { Switch, Route } from 'react-router-dom'
 
@@ -69,14 +68,22 @@ class RestaurantContainer extends React.Component {
 
      render (){
 
-        return (     
+        return (  
             
-        this.state.showRestaurant ?
-          
-        <RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant} home ={this.backToHome}/>
-        :
-        <RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/>
-       
+            <div>
+                <div>
+                    <Searchbar/>
+                </div>
+                <div>
+                    {this.state.showRestaurant ?
+                    <RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant} home ={this.backToHome}/>
+                    :
+                    <RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/>
+                    }
+                </div>
+            </div>
+
+           
         )
     }
 }

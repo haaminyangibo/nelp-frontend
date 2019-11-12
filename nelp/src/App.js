@@ -5,9 +5,6 @@ import RestaurantContainer from './Containers/RestaurantContainer'
 import Header from './Containers/Header'
 
 import Searchbar from './Components/Search'
-import { BrowserRouter as Router } from 'react-router-dom'
-import { Switch, Route } from 'react-router-dom'
-
 
 import LoginForm from './Components/LoginForm'
 import SignUpForm from './Components/SignUpForm'
@@ -36,28 +33,6 @@ class App extends React.Component {
     }
   }
 
-
-  return (
-   
-    
-    <div>  
-   
-
-       <Header/>
-       <NavBar/> 
-       <Searchbar />
-
-
-      
-       <RestaurantContainer />
-    
-
-    
-     
-     </div>
-     
-  );
-
   signIn = user => {
     this.setState({ user: user.first_name })
     localStorage.setItem('token', user.token)
@@ -68,32 +43,37 @@ class App extends React.Component {
     localStorage.removeItem('token')
   }
 
-
-
-
-
-
-
-
-
-
   render(){
+
     return (
+   
+      <div>  
 
-      // <Router>
-        
-      //   <Header></Header>
-        
+        <Header user={this.state.user}></Header>
+         <NavBar/> 
 
-      //   <Switch>
-      //     <Route path="/login" render = { (this.signIn)  => <LoginForm {...props}/>}/>
-      //     <Route component={NotFound}/>
-      //   </Switch>
+    
+         <Router>          
+  
+        <Switch>
+            {/* {user ? } */}
+            <Route exact path = "/" component={routerProps => <LoginForm {...routerProps} signIn={this.signIn} user={this.state.user}/>}/>
+            <Route path = "/restaurants" component={RestaurantContainer}/>
+            <Route path = "/myrestaurants" />
+            <Route path="/login" component={routerProps => <LoginForm {...routerProps} signIn={this.signIn} user={this.state.user}/>}/>
+            <Route path="/search/:searchTerm" />
+            <Route component={NotFound}/>
 
-      // </Router>
 
-      // <div>
-      //   <Header user={this.state.user}></Header>
+          </Switch>
+  
+         </Router>
+
+       </div>
+       
+    );
+          // <div>
+      //   
       //   <SignUpForm signIn={this.signIn}></SignUpForm>
       //   <br>
       //   </br>
@@ -108,8 +88,7 @@ class App extends React.Component {
       //   {/* <Search /> */}
       //   <RestaurantContainer/>
       // </div>
-       
-    );
+    
   }
 
 }

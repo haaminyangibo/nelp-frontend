@@ -9,6 +9,13 @@ class LoginForm extends React.Component {
         password: ""
     }
 
+    componentDidMount(){
+        if (this.props.user) {
+            this.props.history.push('/restaurants')
+        }
+    }
+
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -22,7 +29,7 @@ class LoginForm extends React.Component {
             .then(data => {
                 if (data.error) throw Error(data.error)
                 this.props.signIn(data)
-                // this.props.history.push('/')
+                this.props.history.push('/restaurants')
             })
             .catch(error => console.log(error))
 

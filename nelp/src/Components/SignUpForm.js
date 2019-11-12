@@ -24,7 +24,7 @@ class SignUpForm extends React.Component {
         return API.createUser(this.state).then(data => {
             if (data.error) throw Error(data.error)
             this.props.signIn(data)
-             // this.props.history.push('/')
+            //  this.props.history.push('/')
         })
         .catch(error => console.log(error))
     }
