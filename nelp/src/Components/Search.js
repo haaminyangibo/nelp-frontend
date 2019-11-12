@@ -1,135 +1,64 @@
-// import React, { Component } from 'react'
-// import { Search, Grid, Header, Segment } from 'semantic-ui-react'
-// import RestaurantList from './RestaurantList'
+import React from 'react'
+// import { Grid, Header, Segment } from 'semantic-ui-react'
+import RestaurantList from './RestaurantList'
+import API from '../API'
+
+import _ from 'lodash'
+import RestaurantCard from './RestaurantCard'
 
 
 
+class Searchbar extends React.Component {
 
+state = {
 
-// class Searchbar extends React.Component {
+        initialItems :[],
+        items: ""
+    }
 
-//     componentDidMount(){
-//         return fetch("http://localhost:3000/restaurants").then(resp=> resp.json()).then( data => this.setState({
+    filterList = (event) => {
+        
+ 
+    API.getRestaurants("Indian").then(data => this.setState({ initialItems: data}))
+        // debugger
+    let items = this.state.initialItems.map(item=> item.name)
+    items = items.filter(item => {
 
-//                     options: data["businesses"]
-//                     }))
+    return item.toString().toLowerCase().search(event.target.value.toString().toLowerCase()) !== -1 })
 
-//     }
-//     state = { isLoading: false, results: [], value: '' , options: []}
+    
+    
+    this.setState({ items:items })}
 
-//     handleResultSelect = (e, { result }) => this.setState({ value: result.title })
-  
-//     handleSearchChange = (e, { value }) => {
-//       this.setState({ isLoading: true, value })
-  
-//       setTimeout(() => {
-//         if (this.state.value.length < 1) return this.setState({
-//             isLoading: false, results: [], value: '' , options: []
+    handleSubmit = (event) => {
+        event.preventDefault()
+        console.log(event.target.value)
 
-//         })
-  
-//         const re = new RegExp(this.state.options.escapeRegExp(this.state.value), 'i')
-//         const isMatch = (result) => re.test(result.title)
-  
-//         this.setState({
-//           isLoading: false,
-//           results: this.state.options.filter(this.state.options, isMatch),
-//         })
-//       }, 300)
-//     }
-  
-//     render() {
-//       const { isLoading, value, results } = this.state
-  
-//       const source = this.state.options
-//       return (
-//         <Grid>
-//           <Grid.Column width={6}>
-//             <Search
-//               loading={isLoading}
-//               onResultSelect={this.handleResultSelect}
-//               onSearchChange= {
-//                   _.debounce(this.handleSearchChange, 500, {
-//                 leading: true,
-//               })}
-//               results={results}
-//               value={value}
-//               {...this.props}
-//             />
-//           </Grid.Column>
-//           <Grid.Column width={10}>
-//             <Segment>
-//               <Header>State</Header>
-//               <pre style={{ overflowX: 'auto' }}>
-//                 {JSON.stringify(this.state, null, 2)}
-//               </pre>
-//               <Header>Options</Header>
-//               <pre style={{ overflowX: 'auto' }}>
-//                 {JSON.stringify(this.state.options, null, 2)}
-//             </pre>
-//           </Segment>
-//         </Grid.Column>
-//       </Grid>
-//     )
-//   }
+    }
+
+   
 
 
 
+      
+       
+    
 
+    
+    render (){
+        return(
 
+        <div>
 
+            <form>
+                <input type ="text" placeholder ="search for restaurants" onChange ={this.filterList} onSubmit={this.handleSubmit}/>
+            </form>
+            
+            {/* {this.state.initialItems.map (item => item.name === this.state.items <RestaurantCard restaurant ={item}/>)} */}
+        </div>
+      
+      )
+    }
+} 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     // state = {
-//     //     options :[],
-//     //     {
-//     //         "isLoading": false,
-//     //         "results": [],
-//     //         "value": ""
-//     //       }
-
-//     // }
-
-//     // componentDidMount(){
-//     //     return fetch("http://localhost:3000/restaurants").then(resp=> resp.json()).then( data => this.setState({
-
-//     //         options: data["businesses"]
-//     //         }))
-
-//     //     }
-
-//     // render( ){
-
-//     //     return(
-
-//     //         <Search
-//     //         placeholder ="Search for a Restaurant"
-//     //         fluid
-//     //         selction
-//     //         options ={this.state.options}
-//     //         />
-//     //     )
-//     // }
-
-
-// }
-
-// export default Searchbar
+export default Searchbar
