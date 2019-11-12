@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react'
+import API from '../API';
 
 class LoginForm extends React.Component {
 
@@ -14,9 +15,23 @@ class LoginForm extends React.Component {
         })
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        event.target.reset();
+        API.signIn(this.state.email, this.state.password)
+            .then(data => {
+                if (data.error) throw Error(data.error)
+                this.props.signIn(data)
+                // this.props.history.push('/')
+            })
+            .catch(error => console.log(error))
+
+    }
+
     render(){
         return(
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
+                        <h1>Login</h1>
                 <Form.Field>
                     <input placeholder='Email' name="email" value={this.state.email} onChange={this.handleChange}/>
                 </Form.Field>

@@ -1,4 +1,4 @@
-import bad_restaurants from './bad_restaurants'
+import bad_restaurants from './data/bad_restaurants'
 
 const API_ENDPOINT = "http://localhost:3000";
 
@@ -7,6 +7,7 @@ const SIGN_IN_URL = `${API_ENDPOINT}/signin`;
 const VALIDATE_URL = `${API_ENDPOINT}/validate`; // TODO
 
 const RESTAURANTS_URL = `${API_ENDPOINT}/restaurants`;
+
 
 // YELP API
 
@@ -25,6 +26,7 @@ const getRestaurantReviews = (businessId) => {
     return get(url)
 }
 
+
 // NEEDS TO RUN IN APP.js 
 const getWorstReviewedRestaurants = () => {
     let badRestaurantsData = []
@@ -35,12 +37,11 @@ const getWorstReviewedRestaurants = () => {
 }
 
 
-
 // USER CREATION & AUTHENTICATION
 
 const createUser = (userData) => {
     let configObject = generateConfigObject("POST", userData)
-    return post(USERS_URL, configObject).then(console.log)
+    return post(USERS_URL, configObject)
 }
 
 const signIn = (email, password) => {
@@ -48,7 +49,15 @@ const signIn = (email, password) => {
         email: email,
         password: password 
     }
-    post(SIGN_IN_URL, data).then(setTokenToLocalStorage)
+    return post(SIGN_IN_URL, data)
+}
+
+const validate = () => {
+    return fetch(VALIDATE_URL, {
+        headers: {
+            Authorization: localStorage.getItem('token')
+        } 
+    }).then(resp => resp.json())
 }
 
 const signOut = () => {
@@ -56,6 +65,7 @@ const signOut = () => {
 }
 
 const setTokenToLocalStorage = (resp) => {
+    debugger
     localStorage.setItem("token", resp.token)
 }
 
@@ -89,5 +99,6 @@ export default {
     getWorstReviewedRestaurants,
     createUser,
     signIn, 
-    signOut
+    signOut,
+    validate
 }
