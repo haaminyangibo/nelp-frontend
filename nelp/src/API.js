@@ -5,18 +5,18 @@ const API_ENDPOINT = "http://localhost:3000";
 const USERS_URL = `${API_ENDPOINT}/users`;
 const SIGN_IN_URL = `${API_ENDPOINT}/signin`;
 const VALIDATE_URL = `${API_ENDPOINT}/validate`; // TODO
-const location = "london"
 
 const RESTAURANTS_URL = `${API_ENDPOINT}/restaurants`;
 
+const SAVED_RESTAURANTS_URL = `${API_ENDPOINT}/saved_restaurants`
 
 // YELP API
 
-const getRestaurants = (category) => {
-    // debugger
-    const url = `${RESTAURANTS_URL}?location=${location}&category=${category}`
-    // debugger
-    return get(url)
+
+const getRestaurants = (category =  "all") => {
+    const url = `${RESTAURANTS_URL}?location=london&category=${category}`
+    return get(url).then(console.log)
+
 }
 
 const getRestaurant = (businessId) => {
@@ -24,14 +24,26 @@ const getRestaurant = (businessId) => {
     return get(url)
 }
 
+const saveRestaurant = (businessId) => {
+    return post(SAVED_RESTAURANTS_URL, {
+        headers: {
+            Authorization: localStorage.getItem('token')
+        },
+        parameters: {
+            token: localStorage.getItem('token'),
+            restaurant_id: businessId
+        }
+    }).then(console.log)
+}
+
+// 1i1O-Eg1L8ZWbtjtzi5n1Q
+
 const getRestaurantReviews = (businessId) => {
     const url = `${RESTAURANTS_URL}/${businessId}/reviews`
     return get(url)
 }
 
 
-
-// NEEDS TO RUN IN APP.js 
 const getWorstReviewedRestaurants = () => {
     let badRestaurantsData = []
     bad_restaurants.forEach(business_id => {
@@ -39,6 +51,7 @@ const getWorstReviewedRestaurants = () => {
     })
     return badRestaurantsData
 }
+
 
 
 // USER CREATION & AUTHENTICATION
@@ -66,11 +79,6 @@ const validate = () => {
 
 const signOut = () => {
     localStorage.removeItem("token")
-}
-
-const setTokenToLocalStorage = (resp) => {
-    debugger
-    localStorage.setItem("token", resp.token)
 }
 
 
@@ -101,6 +109,7 @@ export default {
     getRestaurant,
     getRestaurantReviews,
     getWorstReviewedRestaurants,
+    saveRestaurant,
     createUser,
     signIn, 
     signOut,
