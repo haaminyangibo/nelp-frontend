@@ -20,3 +20,22 @@
 .App-link {
   color: #09d3ac;
 }
+
+.image {
+    object-fit: cover;
+ 
+}
+
+.main-header {
+
+  height: 300px
+}
+
+.image {
+  object-fit:cover ;
+  
+}
+
+.header-menu{
+  height : 100px;
+}

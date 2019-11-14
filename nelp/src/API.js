@@ -16,7 +16,7 @@ const getRestaurants = (category) => {
     // debugger
     const url = `${RESTAURANTS_URL}?location=${location}&category=${category}`
     // debugger
-    return get(url).then(console.log)
+    return get(url)
 }
 
 const getRestaurant = (businessId) => {
@@ -28,6 +28,7 @@ const getRestaurantReviews = (businessId) => {
     const url = `${RESTAURANTS_URL}/${businessId}/reviews`
     return get(url)
 }
+
 
 
 // NEEDS TO RUN IN APP.js 
