@@ -13,10 +13,10 @@ const SAVED_RESTAURANTS_URL = `${API_ENDPOINT}/saved_restaurants`
 // YELP API
 
 
-const getRestaurants = (category =  "all") => {
+const getRestaurants = (category ) => {
+    // debugger
     const url = `${RESTAURANTS_URL}?location=london&category=${category}`
-    return get(url).then(console.log)
-
+    return get(url)
 }
 
 const getRestaurant = (businessId) => {

@@ -44,7 +44,6 @@ class  RestaurantDetails extends React.Component {
                     <Card.Content extra>
                         <div class = "ui two buttons">
                     <Button basic onClick ={()=> saveRestaurant(restaurant.id) }>Save Restaurant</Button>
-                    
                     </div>
                 
                 </Card.Content>

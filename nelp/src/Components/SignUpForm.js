@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Container } from 'semantic-ui-react'
 import signup_illustration from '../data/signup_illustration.png'
 import API from '../API';
 
@@ -32,10 +32,11 @@ class SignUpForm extends React.Component {
     render(){
         return(
             <div>
-                <img src={signup_illustration}></img>
-                <h2>Sign Up for Nelp</h2>
-                <h3>Connect with terrible restaurants</h3>
-                <Form onSubmit={this.handleSubmit}>
+                <Container centered >
+                <img src={signup_illustration} class="center"></img>
+                <h2 class="form-text">Sign Up for Nelp</h2>
+                <h3 class="form-text">Connect with terrible restaurants</h3>
+                <Form className="form" onSubmit={this.handleSubmit}>
                     <Form.Checkbox required name="terms"label='By continuing, I agree to Nelp’s Terms of Service and acknowledge Nelp’s Privacy Policy, including Nelp’s cookie policy.' />
                     <Form.Group widths='equal'>
                         <Form.Input required name="first_name"placeholder='First Name' onChange={this.handleChange} />
@@ -49,6 +50,7 @@ class SignUpForm extends React.Component {
 
                     <Button type="submit">Sign Up</Button>
                 </Form>
+                </Container>
             </div>
         )
     }
