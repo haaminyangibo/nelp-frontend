@@ -11,7 +11,6 @@ import RestaurantCard from './RestaurantCard'
 class Searchbar extends React.Component {
 
 state = {
-
         initialItems :[],
         items: ""
     }
@@ -23,10 +22,13 @@ state = {
 
     handleSubmit = (event) => {
     event.preventDefault()
-    console.log(event.target.value)
-    API.getRestaurants(this.state.items).then(data => this.setState({ initialItems: data})).then(console.log(this.state.initialItems))
-
+    // console.log(event.target.value)
+    // API.getRestaurants(this.state.items).then(data => this.setState({ initialItems: data}))
+    let searchResults = this.state.items
+    this.props.showSearchResults(searchResults)
     }
+
+
     
     render (){
         return(

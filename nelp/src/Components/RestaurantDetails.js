@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card} from 'semantic-ui-react'
+import { Button, Card, Container, Divider} from 'semantic-ui-react'
 import Reviews from './Reviews'
 
 class  RestaurantDetails extends React.Component {
@@ -22,20 +22,36 @@ class  RestaurantDetails extends React.Component {
 
     render (){ 
         
-        // const category = restaurant.categories.map(title=> title.title )    
-        // const {restaurant} = this.state.restaurant
+        const {saveRestaurant, home} = this.props
+        const {restaurant} = this.state
 
-        return (
-            
+        return (   
                 <div>
-                    <Card   
-                    image = {this.state.restaurant.image_url}
-                    header= {this.state.restaurant.name}
-                    // meta = {category + " " + restaurant.rating}
-                    description= {this.state.restaurant.rating}   
-                    saveRestaurant = {this.props.saveRestaurant}   
-                    />
-                    <Reviews id ={this.props.id}/>            
+        <Container centered textAlign="center">  
+          <Card.Group centered >
+            <Card >
+                <img src={restaurant.image_url} height={200}/> 
+                <Card.Content>
+            
+                    <Card.Header>{restaurant.name}</Card.Header>
+                    <Card.Meta>
+                        <span className='date'>{restaurant.price}</span>
+                    </Card.Meta>
+                    <Card.Description>
+                        Rating: {restaurant.rating }
+                    </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <div class = "ui two buttons">
+                    <Button basic onClick ={()=> saveRestaurant(restaurant.id) }>Save Restaurant</Button>
+                    
+                    </div>
+                
+                </Card.Content>
+                <Reviews id ={this.props.id}/>   
+            </Card>   
+          </Card.Group>  
+        </Container> 
                   
                 </div>    
 

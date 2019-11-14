@@ -3,15 +3,12 @@ import NavBar from './Containers/NavBar'
 import './App.css';
 import RestaurantContainer from './Containers/RestaurantContainer'
 import Header from './Containers/Header'
-
-import Searchbar from './Components/Search'
-
 import LoginForm from './Components/LoginForm'
 import SignUpForm from './Components/SignUpForm'
 import API from './API';
-import {Button} from 'semantic-ui-react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import NotFound from './Components/NotFound'
+import {Container} from 'semantic-ui-react'
 
 
 class App extends React.Component {
@@ -49,18 +46,19 @@ class App extends React.Component {
    
       <div>  
 
-        <Header user={this.state.user}></Header>
-         <NavBar/> 
+        
+          <Header user={this.state.user}></Header>
 
     
          <Router>          
-  
+        
         <Switch>
             {/* {user ? } */}
             <Route exact path = "/" component={routerProps => <LoginForm {...routerProps} signIn={this.signIn} user={this.state.user}/>}/>
             <Route path = "/restaurants" component={RestaurantContainer}/>
             <Route path = "/myrestaurants" />
             <Route path="/login" component={routerProps => <LoginForm {...routerProps} signIn={this.signIn} user={this.state.user}/>}/>
+            <Route path ="/signup" component={routerProps => <SignUpForm {...routerProps} signIn={this.signIn} user={this.state.user}/>} />
             <Route path="/search/:searchTerm" />
             <Route component={NotFound}/>
 
@@ -72,23 +70,7 @@ class App extends React.Component {
        </div>
        
     );
-          // <div>
-      //   
-      //   <SignUpForm signIn={this.signIn}></SignUpForm>
-      //   <br>
-      //   </br>
-      //   <LoginForm signIn={this.signIn}></LoginForm>
-      //   { this.state.user && <Button onClick={() => this.signOut()}>Sign Out</Button>}
-      // </div>
-      
-      // INTEGRATE WITH BELOW WHEN SIGN IN/SIGN UP DONE
-      // <div>  
-      //   <Header/>
-      //   <NavBar/> 
-      //   {/* <Search /> */}
-      //   <RestaurantContainer/>
-      // </div>
-    
+   
   }
 
 }

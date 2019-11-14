@@ -1,28 +1,24 @@
 import React from 'react';
 import RestaurantList from '../Components/RestaurantList'
 import API from '../API';
-import ShowRestaurant from '../Components/ShowRestaurant'
 import RestaurantDetails from '../Components/RestaurantDetails'
-
-import Seacrhabar from '../Components/Search'
-import { Switch, Route } from 'react-router-dom'
-
-
-import Searchbar from '../Components/Search'
-
 import bad_restaurants from '../data/bad_restaurants';
-
-
-
+import NavBar from '../Containers/NavBar'
+import {Container} from 'semantic-ui-react'
+import Header from './Header'
 
 class RestaurantContainer extends React.Component {
 
     state = {
       restaurants : [],
       selectedRestaurant: [],
-      showRestaurant: false,
       selectedRestaurantID : [],
-      savedRestaurant :[]
+      savedRestaurant :[],
+      searchResults: [],
+      displayMySavedRestaurants: false,
+      displaySearchResults: false,
+      displayAllRestaurants: true,
+      showRestaurant: false,
     }
 
     componentDidMount(){
@@ -40,7 +36,7 @@ class RestaurantContainer extends React.Component {
 
    showCardDetails = (id) => {
 
-     let  restaurantId = id
+    let  restaurantId = id
     let clickedRestuarant = (this.state.restaurants.filter(restaurant => restaurant.id === restaurantId ))
 
     this.setState({
@@ -52,10 +48,12 @@ class RestaurantContainer extends React.Component {
     }
 
     saveRestaurant = (id) => {
-         let savedRestaurantId = id   
-
-        this.setState ({
-            savedRestaurant: [...this.state.savedRestaurant, savedRestaurantId]
+ 
+         let savedRestaurantId = id  
+         let newSavedRestaurant = (this.state.restaurants.filter(restaurant => restaurant.id === savedRestaurantId ))
+        Object.assign({}, newSavedRestaurant)
+         this.setState ({
+            savedRestaurant:  [...this.state.savedRestaurant, newSavedRestaurant]
         })}
     
 
@@ -66,26 +64,79 @@ class RestaurantContainer extends React.Component {
         })
     }
 
-     render (){
+    backToHome = () => {
+        console.log("I was Cliked")
+        this.setState({
 
-        return (  
-            
-            <div>
-                <div>
-                    <Searchbar/>
-                </div>
-                <div>
-                    {this.state.showRestaurant ?
-                    <RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant} home ={this.backToHome}/>
-                    :
-                    <RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/>
-                    }
-                </div>
-            </div>
-
-           
-        )
+            displayMySavedRestaurants: false,
+            displaySearchResults: false,
+            displayAllRestaurants: true,
+            showRestaurant: false,
+        })
     }
-}
+
+    showSavedRestaurants = () => {
+        this.setState({
+
+            displayMySavedRestaurants: true,
+            displaySearchResults: false,
+            displayAllRestaurants: false,
+            showRestaurant: false,
+        })
+
+    }
+
+    showSearchResults = (searchResults) => {
+// debugger
+        API.getRestaurants(searchResults).then( searchData =>
+        this.setState({
+            searchResults: searchData,
+
+            displayMySavedRestaurants: false,
+            displaySearchResults: true,
+            displayAllRestaurants: false,
+            showRestaurant: false,
+
+        })
+        )
+
+    }
+    checkWhatMethodToRender = () => {
+
+            if (this.state.showRestaurant) {
+            return (
+                <div><RestaurantDetails id ={this.state.selectedRestaurantID} saveRestaurant = {this.saveRestaurant} home ={this.backToHome}/>
+                </div>
+            )
+            } else if (this.state.displayMySavedRestaurants) {
+            return (
+                <div><RestaurantList restaurants = {this.state.savedRestaurant} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant} /></div>
+            )
+            } else if (this.state.displaySearchResults) {
+                return (
+                <div><RestaurantList restaurants = {this.state.searchResults} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/></div>
+                )
+            } else  {
+            return (
+                <div><RestaurantList restaurants = {this.state.restaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant}/></div>
+                 )
+            } 
+        }
+
+    
+
+     render () {
+        return (  
+            <div>
+                
+                
+             <NavBar home = {this.backToHome} showSavedRestaurants ={this.showSavedRestaurants} showSearchResults={this.showSearchResults} /> 
+                
+                {this.checkWhatMethodToRender()}
+            </div>
+            )
+        }
+    }
+
 
 export default RestaurantContainer

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card} from 'semantic-ui-react'
+import { Comment} from 'semantic-ui-react'
 
 
 class Reviews extends React.Component {
@@ -19,7 +19,22 @@ componentDidMount(){
 render() {
     return(
 
-         this.state.reviews.map( review => <Card description= {review.text}/>)
+         this.state.reviews.map( review => 
+         
+         
+         <Comment >
+            <Comment.Content>
+            <div class= "ui divider"> </div>
+            <Comment.Author as='a'>{review.user.name}</Comment.Author>
+            <Comment.Metadata>
+                <div>Reviewed at: {review.time_created} </div>
+             </Comment.Metadata>
+             <Comment.Metadata>
+                <div>Rating: {review.rating} </div>
+             </Comment.Metadata>
+            <Comment.Text>{review.text}</Comment.Text>
+             </Comment.Content>
+         </Comment>)
              
     )
 
