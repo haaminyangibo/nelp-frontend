@@ -13,7 +13,7 @@ class RestaurantContainer extends React.Component {
       restaurants : [],
       selectedRestaurant: [],
       selectedRestaurantID : [],
-      savedRestaurant :[],
+      savedRestaurants :[],
       searchResults: [],
       displayMySavedRestaurants: false,
       displaySearchResults: false,
@@ -22,9 +22,7 @@ class RestaurantContainer extends React.Component {
     }
 
     componentDidMount(){
-
         bad_restaurants.forEach(id => {
-            // debugger 
             API.getRestaurant(id).then(restaurant => this.setState({
                 restaurants: [
                     ...this.state.restaurants,
@@ -48,17 +46,11 @@ class RestaurantContainer extends React.Component {
     }
 
     saveRestaurant = (id) => {
- 
-         let savedRestaurantId = id  
-         let newSavedRestaurant = (this.state.restaurants.filter(restaurant => restaurant.id === savedRestaurantId ))
-        Object.assign({}, newSavedRestaurant)
-         this.setState ({
-            savedRestaurant:  [...this.state.savedRestaurant, newSavedRestaurant]
-        })}
+        API.saveRestaurant(id).then(alert("You just saved this restaurant!"))
+    }
     
 
     removeCardDetails = () => {
-
         this.setState({
             showRestaurant: false
         })
@@ -75,19 +67,25 @@ class RestaurantContainer extends React.Component {
         })
     }
 
-    showSavedRestaurants = () => {
+    updateStateWithSavedRestaurants = (savedRestaurants) => {
+        debugger
         this.setState({
-
+            savedRestaurants: savedRestaurants["saved_restaurants"]
+        })
+        this.setState({
             displayMySavedRestaurants: true,
             displaySearchResults: false,
             displayAllRestaurants: false,
-            showRestaurant: false,
+            showRestaurant: false
         })
+    }
 
+    showSavedRestaurants = () => {
+        API.getSavedRestaurants(localStorage.getItem('user_id')).then(this.updateStateWithSavedRestaurants)
     }
 
     showSearchResults = (searchResults) => {
-// debugger
+
         API.getRestaurants(searchResults).then( searchData =>
         this.setState({
             searchResults: searchData,
@@ -110,7 +108,7 @@ class RestaurantContainer extends React.Component {
             )
             } else if (this.state.displayMySavedRestaurants) {
             return (
-                <div><RestaurantList restaurants = {this.state.savedRestaurant} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant} /></div>
+                <div><RestaurantList restaurants = {this.state.savedRestaurants} showCardDetails= {this.showCardDetails} selectedRestaurant= {this.state.selectedRestaurant} saveRestaurant = {this.saveRestaurant} /></div>
             )
             } else if (this.state.displaySearchResults) {
                 return (

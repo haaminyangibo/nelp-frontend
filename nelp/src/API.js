@@ -33,10 +33,13 @@ const saveRestaurant = (businessId) => {
             token: localStorage.getItem('token'),
             restaurant_id: businessId
         }
-    }).then(console.log)
+    })
 }
 
-// 1i1O-Eg1L8ZWbtjtzi5n1Q
+const getSavedRestaurants = (userId) => {
+    const url = `${USERS_URL}/${userId}/saved_restaurants`
+    return get(url)
+}
 
 const getRestaurantReviews = (businessId) => {
     const url = `${RESTAURANTS_URL}/${businessId}/reviews`
@@ -78,7 +81,7 @@ const validate = () => {
 }
 
 const signOut = () => {
-    localStorage.removeItem("token")
+    localStorage.clear()
 }
 
 
@@ -109,6 +112,7 @@ export default {
     getRestaurant,
     getRestaurantReviews,
     getWorstReviewedRestaurants,
+    getSavedRestaurants,
     saveRestaurant,
     createUser,
     signIn, 
