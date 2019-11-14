@@ -84,11 +84,12 @@ class RestaurantContainer extends React.Component {
         API.getSavedRestaurants(localStorage.getItem('user_id')).then(this.updateStateWithSavedRestaurants)
     }
 
-    showSearchResults = (searchResults) => {
+    showSearchResults =(category) => {
+// debugger
+        API.getRestaurants(category).then( searchResult =>
 
-        API.getRestaurants(searchResults).then( searchData =>
         this.setState({
-            searchResults: searchData,
+            searchResults: searchResult,
 
             displayMySavedRestaurants: false,
             displaySearchResults: true,
@@ -126,12 +127,23 @@ class RestaurantContainer extends React.Component {
      render () {
         return (  
             <div>
-                
-                
+            
+            <div>
              <NavBar home = {this.backToHome} showSavedRestaurants ={this.showSavedRestaurants} showSearchResults={this.showSearchResults} /> 
-                
-                {this.checkWhatMethodToRender()}
             </div>
+            { this.state.displaySearchResults ?  <div class= "title" >
+              <h1> Here are some Great restaurants! </h1>
+            </div> :  <div class= "title" >
+              <h1> Here are some AWFUL restaurants! </h1>
+            </div>}
+           
+
+            <div class= "restaurant-container">
+                 {this.checkWhatMethodToRender()}
+            </div>
+            </div>
+
+
             )
         }
     }

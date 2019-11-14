@@ -1,5 +1,8 @@
+
+
 .App {
   text-align: center;
+ 
 }
 
 .App-logo {
@@ -27,6 +30,7 @@
 }
 
 .main-header {
+  font-family: 'Bebas Neue', cursive !important; 
 
   height: 300px
 }
@@ -37,5 +41,98 @@
 }
 
 .header-menu{
+  font-family: 'Bebas Neue', cursive !important; 
   height : 100px;
+  background-color: #AF282F !important;
+  font-size: 25px!important; 
+}
+img.nelp{
+
+  
+  min-width: 20%;
+ 
+}
+.ui-two-buttons {
+
+  text-align: center;
+  color: #AF282F !important;
+
+
+}
+input {
+
+  width: 300px;
+  font-family: 'Bebas Neue', cursive !important; 
+
+}
+
+.footer {
+  font-family: 'Bebas Neue', cursive;
+
+width:100%;
+text-align:center;
+
+}
+
+.restaurant-container {
+  font-family: 'Bebas Neue', cursive;
+  margin-top:
+  40px;
+}
+.title {
+  margin-top: 25px;
+  font-family: 'Bebas Neue', cursive !important; 
+
+   color: #AF282F !important;
+text-align: center
+  
+}
+
+.button{
+  text-align: center;
+  background-color: #AF282F !important;
+  font-family: 'Bebas Neue', cursive !important; 
+  font-size: 15px !important;
+
+
+}
+h1{
+  font-family: 'Bebas Neue', cursive !important; 
+  font-size: 35px;
+  
+}
+
+.form-text{
+  
+font-family: 'Bebas Neue', cursive !important; 
+font-size: 40px;
+text-align:center;
+
+
+}
+div.header{
+  font-family: 'Bebas Neue', cursive !important; 
+  
+}
+img.signup_illustration{
+  display: flex;
+  justify-content: center;
+}
+
+.nav{
+
+  font-family: 'Bebas Neue', cursive !important; 
+
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 20px;
+}
+.form {
+
+  font-family: 'Bebas Neue', cursive !important; 
+
 }

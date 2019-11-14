@@ -13,17 +13,15 @@ export default class NavBar extends React.Component{
 render(){
     const {home, showSavedRestaurants, showSearchResults} = this.props
     return(
-        <div>
+        <div class ="nav">
         <Router>
-        <Menu> 
+        <Menu className ="nav"> 
             <Menu.Item name="Home" onClick= {home} />
             <Menu.Item name="Saved Restaurants" onClick ={showSavedRestaurants}/>
-            <Menu.Item name="Resuarants" />
             <Menu.Item position= "right"><Searchbar showSearchResults={showSearchResults}/></Menu.Item>    
         </Menu>
         </Router>
         </div>
-    )
+        )
     }
 }
-

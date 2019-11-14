@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from './Containers/NavBar'
 import './App.css';
 import RestaurantContainer from './Containers/RestaurantContainer'
 import Header from './Containers/Header'
@@ -8,7 +7,8 @@ import SignUpForm from './Components/SignUpForm'
 import API from './API';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import NotFound from './Components/NotFound'
-import {Container} from 'semantic-ui-react'
+import Footer from './Components/Footer'
+
 
 
 class App extends React.Component {
@@ -69,6 +69,7 @@ class App extends React.Component {
   
          </Router>
 
+        <Footer/>
        </div>
        
     );

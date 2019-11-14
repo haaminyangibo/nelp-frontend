@@ -8,10 +8,8 @@ const {restaurant} = props
 
 return (
     <div>
-    <Card.Group itemsPerRow ={1}>
-     
-    <RestaurantCard restaurant = {restaurant}/>
-    
+    <Card.Group itemsPerRow ={1}> 
+         <RestaurantCard restaurant = {restaurant}/>
     </Card.Group>
 
     </div>
