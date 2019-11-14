@@ -17,7 +17,7 @@ render(){
         <Router>
         <Menu> 
             <Menu.Item name="Home" onClick= {home} />
-            <Menu.Item name="Saved Reviews" onClick ={showSavedRestaurants}/>
+            <Menu.Item name="Saved Restaurants" onClick ={showSavedRestaurants}/>
             <Menu.Item name="Resuarants" />
             <Menu.Item position= "right"><Searchbar showSearchResults={showSearchResults}/></Menu.Item>    
         </Menu>

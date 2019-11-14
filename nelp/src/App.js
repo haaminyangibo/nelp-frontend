@@ -14,7 +14,8 @@ import {Container} from 'semantic-ui-react'
 class App extends React.Component {
 
   state = {
-    user: ""
+    user: "",
+    user_id: ""
   }
 
   componentDidMount () {
@@ -33,6 +34,7 @@ class App extends React.Component {
   signIn = user => {
     this.setState({ user: user.first_name })
     localStorage.setItem('token', user.token)
+    localStorage.setItem('user_id', user.id)
   }
 
   signOut = () => {
