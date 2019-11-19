@@ -68,7 +68,7 @@ class RestaurantContainer extends React.Component {
     }
 
     updateStateWithSavedRestaurants = (savedRestaurants) => {
-        debugger
+        // debugger
         this.setState({
             savedRestaurants: savedRestaurants["saved_restaurants"]
         })
@@ -122,6 +122,32 @@ class RestaurantContainer extends React.Component {
             } 
         }
 
+    checkWhatTitleToRender = () => {
+
+        if (this.state.displaySearchResults){
+            return(
+            <div class= "title" >
+              <h1> Here are some Great restaurants! </h1>
+             </div>
+            )
+        }
+
+        else if (this.state.displayMySavedRestaurants){
+            return(
+            <div class= "title" >
+              <h1> Here are your saved restaurants! </h1>
+            </div>
+            )
+        }
+
+        else {
+            return(
+            <div class= "title" >
+            <h1> Here are some AWFUL restaurants! </h1>
+          </div>
+            )
+        }
+    }
     
 
      render () {
@@ -131,11 +157,9 @@ class RestaurantContainer extends React.Component {
             <div>
              <NavBar home = {this.backToHome} showSavedRestaurants ={this.showSavedRestaurants} showSearchResults={this.showSearchResults} /> 
             </div>
-            { this.state.displaySearchResults ?  <div class= "title" >
-              <h1> Here are some Great restaurants! </h1>
-            </div> :  <div class= "title" >
-              <h1> Here are some AWFUL restaurants! </h1>
-            </div>}
+            <div>
+                {this.checkWhatTitleToRender()}
+            </div>
            
 
             <div class= "restaurant-container">

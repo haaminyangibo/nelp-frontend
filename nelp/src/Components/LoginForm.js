@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Container } from 'semantic-ui-react'
 import API from '../API';
 
 class LoginForm extends React.Component {
@@ -37,6 +37,7 @@ class LoginForm extends React.Component {
 
     render(){
         return(
+            <Container centered>
             <Form onSubmit={this.handleSubmit}>
                         <h1>Login</h1>
                 <Form.Field>
@@ -49,6 +50,7 @@ class LoginForm extends React.Component {
                 
                 <Button type='submit'>Log In</Button>
             </Form>
+            </Container>
         )
     }
 

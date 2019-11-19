@@ -16,9 +16,10 @@ state = {
 
     handleSubmit = (event) => {
     event.preventDefault()
+    event.target.reset()
     // console.log(event.target.value)
     // API.getRestaurants(this.state.items).then(data => this.setState({ initialItems: data}))
-    debugger
+    // debugger
     let category = this.state.items
     this.props.showSearchResults(category)
     }
